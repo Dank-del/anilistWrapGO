@@ -11,5 +11,5 @@ func TestMedia(t *testing.T) {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	log.Println(res)
+	log.Println(res.Data.Media.Title.Native)
 }
