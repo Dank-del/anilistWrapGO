@@ -1,6 +1,7 @@
 package Media
 
 import (
+	"anilistWrapGo/anilistWrapGo"
 	"bytes"
 	"encoding/json"
 	"io/ioutil"
@@ -15,7 +16,7 @@ func DoRequest(query string) (res *AnilistMedia, err error) {
 	if err != nil {
 		return nil, err
 	}
-	resp, err := http.Post("https://graphql.anilist.co", "application/json", bytes.NewBuffer(gq))
+	resp, err := http.Post(anilistWrapGo.BaseUrl, "application/json", bytes.NewBuffer(gq))
 
 	defer resp.Body.Close()
 
