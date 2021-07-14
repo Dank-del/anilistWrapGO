@@ -1,25 +1,46 @@
-package Media
+/*
+ * This file is part of anilistWrapGo (https://github.com/Dank-del/anilistWrapGO).
+ * Copyright (c) 2021 Sayan Biswas, ALiwoto.
+ *
+ * This library is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this library. If not, see <http://www.gnu.org/licenses/>.
+ */
 
-import "anilistWrapGo/anilistWrapGo"
+package media
+
+import "github.com/Dank-del/anilistWrapGO/anilistWrapGo"
 
 type AnilistMedia struct {
-	Data   Data                   `json:"data"`
+	Data   *Data                  `json:"data"`
 	Errors []anilistWrapGo.Errors `json:"errors"`
 }
+
 type Title struct {
 	Romaji  string `json:"romaji"`
 	English string `json:"english"`
 	Native  string `json:"native"`
 }
+
 type ExternalLinks struct {
 	URL string `json:"url"`
 }
+
 type AiringSchedule struct {
 	Nodes []interface{} `json:"nodes"`
 }
+
 type Media struct {
 	ID             int             `json:"id"`
-	Title          Title           `json:"title"`
+	Title          *Title          `json:"title"`
 	Type           string          `json:"type"`
 	Format         string          `json:"format"`
 	Status         string          `json:"status"`
@@ -33,9 +54,10 @@ type Media struct {
 	Genres         []string        `json:"genres"`
 	Synonyms       []string        `json:"synonyms"`
 	AverageScore   int             `json:"averageScore"`
-	AiringSchedule AiringSchedule  `json:"airingSchedule"`
+	AiringSchedule *AiringSchedule `json:"airingSchedule"`
 	SiteURL        string          `json:"siteUrl"`
 }
+
 type Data struct {
-	Media Media `json:"Media"`
+	Media *Media `json:"Media"`
 }

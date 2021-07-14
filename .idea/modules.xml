@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/anilistWrapGO.iml" filepath="$PROJECT_DIR$/.idea/anilistWrapGO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/anilistWrapGo.iml" filepath="$PROJECT_DIR$/.idea/anilistWrapGo.iml" />
     </modules>
   </component>
 </project>

@@ -15,14 +15,50 @@
  * along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package anilistWrapGo
+package media
 
-type Locations struct {
-	Line   int `json:"line"`
-	Column int `json:"column"`
-}
-type Errors struct {
-	Message   string      `json:"message"`
-	Status    int         `json:"status"`
-	Locations []Locations `json:"locations"`
-}
+const (
+	MediaGraphql = `
+query ($search: String) {
+    Media (search: $search) {
+      id
+      title {
+        romaji
+        english
+        native
+      }
+      type
+      format
+      status
+      description
+      episodes
+      bannerImage
+    externalLinks{
+      url
+    }
+      duration
+      chapters
+      volumes
+      genres
+      synonyms
+      averageScore
+      airingSchedule(notYetAired: true) {
+        nodes {
+          airingAt
+          timeUntilAiring
+          episode
+        }
+      }
+      siteUrl
+    }
+  }
+
+`
+)
+
+const (
+	contentType    = "application/json"
+	variablesValue = "variables"
+	queryKey       = "query"
+	searchKey      = "search"
+)
