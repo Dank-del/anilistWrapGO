@@ -1,5 +1,5 @@
 /*
- * This file is part of anilistWrapGo (https://github.com/Dank-del/anilistWrapGo).
+ * This file is part of anilistWrapGo (https://github.com/Dank-del/anilistWrapGO).
  * Copyright (c) 2021 Sayan Biswas, ALiwoto.
  *
  * This library is free software: you can redistribute it and/or modify

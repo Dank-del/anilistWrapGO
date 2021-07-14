@@ -1,5 +1,5 @@
 /*
- * This file is part of anilistWrapGo (https://github.com/Dank-del/anilistWrapGo).
+ * This file is part of anilistWrapGo (https://github.com/Dank-del/anilistWrapGO).
  * Copyright (c) 2021 Sayan Biswas, ALiwoto.
  *
  * This library is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/Dank-del/anilistWrapGo/anilistWrapGo"
+	"github.com/Dank-del/anilistWrapGO/anilistWrapGo"
 )
 
 type queryMap map[string]interface{}
