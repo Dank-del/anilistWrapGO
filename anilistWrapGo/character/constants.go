@@ -1,4 +1,4 @@
-package Character
+package characters
 
 const (
 	CharacterQuery = ` query ($query: String) {
@@ -41,4 +41,10 @@ const (
         }
     }
 `
+)
+
+const (
+	contentType    = "application/json"
+	variablesValue = "variables"
+	queryKey       = "query"
 )

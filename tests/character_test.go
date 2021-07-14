@@ -11,5 +11,6 @@ func TestCharacter(t *testing.T) {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+
 	log.Println(res.Data.Character.Name.Native)
 }

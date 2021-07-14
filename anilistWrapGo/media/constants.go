@@ -1,4 +1,4 @@
-package Media
+package media
 
 const (
 	MediaGraphql = `
@@ -37,4 +37,11 @@ query ($search: String) {
   }
 
 `
+)
+
+const (
+	contentType    = "application/json"
+	variablesValue = "variables"
+	queryKey       = "query"
+	searchKey      = "search"
 )

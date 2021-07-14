@@ -1,4 +1,4 @@
-package Character
+package characters
 
 import "anilistWrapGo/anilistWrapGo"
 
