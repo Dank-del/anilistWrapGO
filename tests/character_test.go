@@ -25,7 +25,7 @@ import (
 )
 
 func TestCharacter(t *testing.T) {
-	res, err := characters.DoRequest("Rin Tohsaka")
+	res, err := characters.CharacterRequest("Rin Tohsaka")
 	if err != nil {
 		log.Fatal(err.Error())
 	}

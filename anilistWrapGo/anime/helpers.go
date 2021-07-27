@@ -15,20 +15,19 @@
  * along with this library. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package media
+package anime
 
 import (
 	"bytes"
 	"encoding/json"
+	"github.com/Dank-del/anilistWrapGO/anilistWrapGo"
 	"io/ioutil"
 	"net/http"
-
-	"github.com/Dank-del/anilistWrapGO/anilistWrapGo"
 )
 
 type queryMap map[string]interface{}
 
-func MediaRequest(query string) (*AnilistMedia, error) {
+func AnimeRequest(query string) (*AnilistAnime, error) {
 	gq, err := json.Marshal(getQuery(query))
 	if err != nil {
 		return nil, err
@@ -46,7 +45,7 @@ func MediaRequest(query string) (*AnilistMedia, error) {
 		return nil, err
 	}
 
-	response := new(AnilistMedia)
+	response := new(AnilistAnime)
 	err = json.Unmarshal(b, response)
 	if err != nil {
 		return nil, err
@@ -57,7 +56,7 @@ func MediaRequest(query string) (*AnilistMedia, error) {
 
 func getQuery(query string) queryMap {
 	return queryMap{
-		queryKey: MediaGraphql,
+		queryKey: AnimeGraphQL,
 		variablesValue: queryMap{
 			searchKey: query,
 		},

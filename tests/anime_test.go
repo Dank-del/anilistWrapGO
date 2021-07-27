@@ -21,13 +21,14 @@ import (
 	"log"
 	"testing"
 
-	"github.com/Dank-del/anilistWrapGO/anilistWrapGo/media"
+	"github.com/Dank-del/anilistWrapGO/anilistWrapGo/anime"
 )
 
-func TestMedia(t *testing.T) {
-	res, err := media.MediaRequest("higehiro")
+func TestAnime(t *testing.T) {
+	res, err := anime.AnimeRequest("Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	log.Println(res.Data.Media.Title.Native)
+
+	log.Println(res.Data.Media.Title)
 }

@@ -28,7 +28,7 @@ import (
 
 type queryMap map[string]interface{}
 
-func DoRequest(query string) (*AnilistCharacter, error) {
+func CharacterRequest(query string) (*AnilistCharacter, error) {
 	gq, err := json.Marshal(getQuery(query))
 	if err != nil {
 		return nil, err
