@@ -20,7 +20,9 @@ package characters
 import (
 	"bytes"
 	"encoding/json"
+	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
 
 	"github.com/Dank-del/anilistWrapGO/anilistWrapGo"
@@ -39,7 +41,13 @@ func CharacterRequest(query string) (*AnilistCharacter, error) {
 		return nil, err
 	}
 
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+			log.Println(err.Error())
+			return
+		}
+	}(resp.Body)
 
 	b, err := ioutil.ReadAll(resp.Body)
 	if err != nil {

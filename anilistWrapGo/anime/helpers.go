@@ -21,7 +21,9 @@ import (
 	"bytes"
 	"encoding/json"
 	"github.com/Dank-del/anilistWrapGO/anilistWrapGo"
+	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
 )
 
@@ -38,7 +40,13 @@ func AnimeRequest(query string) (*AnilistAnime, error) {
 		return nil, err
 	}
 
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+			log.Println(err.Error())
+			return
+		}
+	}(resp.Body)
 
 	b, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
