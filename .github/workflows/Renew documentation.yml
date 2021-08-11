@@ -1,4 +1,9 @@
+name: DocRenewer
+
 on:
+  push:
+    branches:
+      - master 
   release:
     types:
       - created
