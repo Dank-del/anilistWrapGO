@@ -18,16 +18,21 @@
 package tests
 
 import (
+	"github.com/Dank-del/anilistWrapGO"
 	"log"
 	"testing"
-
-	"github.com/Dank-del/anilistWrapGO/anilistWrapGo/media"
 )
 
 func TestMedia(t *testing.T) {
-	res, err := media.MediaRequest("higehiro")
+	searchData, err := anilistWrapGO.SearchMedia("higehiro")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	log.Println(res.Data.Media.Title.Native)
+	log.Println(searchData.Data.Media.Title.Native)
+
+	getResult, err := anilistWrapGO.GetMediaByID(117343)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	log.Println(getResult.Data.Media.Title.Native)
 }

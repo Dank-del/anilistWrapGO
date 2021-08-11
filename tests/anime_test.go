@@ -18,17 +18,23 @@
 package tests
 
 import (
+	"github.com/Dank-del/anilistWrapGO"
 	"log"
 	"testing"
-
-	"github.com/Dank-del/anilistWrapGO/anilistWrapGo/anime"
 )
 
 func TestAnime(t *testing.T) {
-	res, err := anime.AnimeRequest("Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e")
+	searchResult, err := anilistWrapGO.SearchAnime("kanojo mo kanojo")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	log.Println(res.Data.Media.Title)
+	log.Println(searchResult.Data.Media.Title)
+
+	getResult, err := anilistWrapGO.GetAnimeByID(117343)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	log.Println(getResult.Data.Media)
 }

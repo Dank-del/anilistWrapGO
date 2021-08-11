@@ -25,12 +25,46 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 type queryMap map[string]interface{}
 
-func UserRequest(query string) (*AnilistUser, error) {
+func UsernameRequest(query string) (*AnilistUser, error) {
 	gq, err := json.Marshal(getQuery(query))
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := http.Post(anilistWrapGo.BaseUrl, contentType, bytes.NewBuffer(gq))
+	if err != nil {
+		return nil, err
+	}
+
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+			log.Println(err.Error())
+			return
+		}
+	}(resp.Body)
+
+	b, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	response := new(AnilistUser)
+	err = json.Unmarshal(b, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func IDRequest(ID int64) (*AnilistUser, error) {
+	gq, err := json.Marshal(getIDQuery(ID))
 	if err != nil {
 		return nil, err
 	}
@@ -67,6 +101,15 @@ func getQuery(query string) queryMap {
 		queryKey: UserGraphQL,
 		variablesValue: queryMap{
 			searchKey: query,
+		},
+	}
+}
+
+func getIDQuery(ID int64) queryMap {
+	return queryMap{
+		queryKey: UserGraphQL,
+		variablesValue: queryMap{
+			idKey: strconv.FormatInt(ID, 10),
 		},
 	}
 }

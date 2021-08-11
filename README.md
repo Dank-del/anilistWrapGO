@@ -3,53 +3,44 @@
 > Unofficial Anilist.co GraphQL API wrapper for GoLang.
 
 
-## Example
+## Examples
 
+### All examples are present as tests in `test` directory.
+Below are a few snippets from there :3
+
+#### User 
 ```go
-package main
+   usernameResult, err := anilistWrapGO.GetUserByUsername("mimiee") // this person is a thot
+   if err != nil {
+   log.Fatal(err.Error())
+   }
+   log.Println(*usernameResult.Data.User.Name)
+```
 
-import (
-	"github.com/Dank-del/anilistWrapGO/anilistWrapGo/anime"
-	characters "github.com/Dank-del/anilistWrapGO/anilistWrapGo/character"
-	"github.com/Dank-del/anilistWrapGO/anilistWrapGo/media"
-	"github.com/Dank-del/anilistWrapGO/anilistWrapGo/user"
-	"log"
-)
+#### Anime 
+```go
+   searchResult, err := anilistWrapGO.SearchAnime("kanojo mo kanojo") // stupid anime
+   if err != nil {
+   log.Fatal(err.Error())
+   }
+   log.Println(searchResult.Data.Media.Title)
+```
 
-func main() {
-	// Search Anime
-	animeres, err := anime.AnimeRequest("Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
+#### Media
+```go
+   searchData, err := anilistWrapGO.SearchMedia("higehiro") // thot anime
+   if err != nil {
+   log.Fatal(err.Error())
+   }
+   log.Println(searchData.Data.Media.Title.Native)
+```
 
-	log.Println(animeres.Data.Media.Title)
-	// 2021/08/09 15:11:19 {Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e Youkoso Jitsuryoku Shijou Shugi no Kyoushitsu e Classroom of the Elite ようこそ実力至上主義の教室へ}
+#### Character
+```go
+   searchResult, err := anilistWrapGO.SearchCharacter("Rin Tohsaka") // goddess
+   if err != nil {
+   log.Fatal(err.Error())
+   }
 
-	// Search Character
-	characterRes, err := characters.CharacterRequest("Rin Tohsaka")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	log.Println(characterRes.Data.Character.Name.Native)
-	// 2021/08/09 15:11:20 遠坂凛
-
-	// Search Media
-	mediaRes, err := media.MediaRequest("higehiro")
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-	log.Println(mediaRes.Data.Media.Title.Native)
-	// 2021/08/09 15:11:20 ひげを剃る。そして女子高生を拾う。
-
-	// Search user
-	userres, err := user.UserRequest("mimiee") // this person is a thot
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-
-	log.Println(*userres.Data.User.Name)
-	// 2021/08/11 16:03:38 Mimiee
-}
+   log.Println(searchResult.Data.Character.Name.Native)
 ```

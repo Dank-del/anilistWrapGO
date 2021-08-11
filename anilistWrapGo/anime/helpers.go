@@ -25,12 +25,13 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 type queryMap map[string]interface{}
 
-func AnimeRequest(query string) (*AnilistAnime, error) {
-	gq, err := json.Marshal(getQuery(query))
+func SearchRequest(query string) (*AnilistAnime, error) {
+	gq, err := json.Marshal(getSearchQuery(query))
 	if err != nil {
 		return nil, err
 	}
@@ -62,11 +63,53 @@ func AnimeRequest(query string) (*AnilistAnime, error) {
 	return response, nil
 }
 
-func getQuery(query string) queryMap {
+func IdRequest(ID int64) (*AnilistAnime, error) {
+	gq, err := json.Marshal(getIDQuery(ID))
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := http.Post(anilistWrapGo.BaseUrl, contentType, bytes.NewBuffer(gq))
+	if err != nil {
+		return nil, err
+	}
+
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+			log.Println(err.Error())
+			return
+		}
+	}(resp.Body)
+
+	b, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	response := new(AnilistAnime)
+	err = json.Unmarshal(b, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+func getSearchQuery(query string) queryMap {
 	return queryMap{
 		queryKey: AnimeGraphQL,
 		variablesValue: queryMap{
 			searchKey: query,
+		},
+	}
+}
+
+func getIDQuery(ID int64) queryMap {
+	return queryMap{
+		queryKey: AnimeGraphQL,
+		variablesValue: queryMap{
+			idKey: strconv.FormatInt(ID, 10),
 		},
 	}
 }

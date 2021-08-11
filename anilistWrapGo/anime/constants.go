@@ -22,6 +22,7 @@ const (
 	variablesValue = "variables"
 	queryKey       = "query"
 	searchKey      = "search"
+	idKey          = "id"
 )
 
 const (
@@ -249,9 +250,4 @@ query ($id: Int,$search: String) {
 
 
 `
-)
-
-const (
-	Crunchyroll Site     = "Crunchyroll"
-	Japanese    Language = "Japanese"
 )

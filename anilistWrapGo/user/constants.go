@@ -171,4 +171,5 @@ const (
 	variablesValue = "variables"
 	queryKey       = "query"
 	searchKey      = "name"
+	idKey          = "id"
 )

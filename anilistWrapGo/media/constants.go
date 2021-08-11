@@ -19,40 +19,39 @@ package media
 
 const (
 	MediaGraphql = `
-query ($search: String) {
-    Media (search: $search) {
-      id
-      title {
-        romaji
-        english
-        native
-      }
-      type
-      format
-      status
-      description
-      episodes
-      bannerImage
-    externalLinks{
+query ($search: String, $id: Int) {
+  Media(search: $search, id: $id) {
+    id
+    title {
+      romaji
+      english
+      native
+    }
+    type
+    format
+    status
+    description
+    episodes
+    bannerImage
+    externalLinks {
       url
     }
-      duration
-      chapters
-      volumes
-      genres
-      synonyms
-      averageScore
-      airingSchedule(notYetAired: true) {
-        nodes {
-          airingAt
-          timeUntilAiring
-          episode
-        }
+    duration
+    chapters
+    volumes
+    genres
+    synonyms
+    averageScore
+    airingSchedule(notYetAired: true) {
+      nodes {
+        airingAt
+        timeUntilAiring
+        episode
       }
-      siteUrl
     }
+    siteUrl
   }
-
+}
 `
 )
 
@@ -61,4 +60,5 @@ const (
 	variablesValue = "variables"
 	queryKey       = "query"
 	searchKey      = "search"
+	idKey          = "id"
 )

@@ -18,16 +18,23 @@
 package tests
 
 import (
-	"github.com/Dank-del/anilistWrapGO/anilistWrapGo/user"
+	"github.com/Dank-del/anilistWrapGO"
 	"log"
 	"testing"
 )
 
 func TestUser(t *testing.T) {
-	res, err := user.UserRequest("mimiee")
+	usernameResult, err := anilistWrapGO.GetUserByUsername("mimiee") // this person is a thot
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	log.Println(*res.Data.User.Name)
+	log.Println(*usernameResult.Data.User.Name)
+
+	idResult, err := anilistWrapGO.GetUserByID(724274) // its meee owo
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	log.Println(*idResult.Data.User.Name)
 }

@@ -18,17 +18,23 @@
 package tests
 
 import (
+	"github.com/Dank-del/anilistWrapGO"
 	"log"
 	"testing"
-
-	characters "github.com/Dank-del/anilistWrapGO/anilistWrapGo/character"
 )
 
 func TestCharacter(t *testing.T) {
-	res, err := characters.CharacterRequest("Rin Tohsaka")
+	searchResult, err := anilistWrapGO.SearchCharacter("Rin Tohsaka")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	log.Println(res.Data.Character.Name.Native)
+	log.Println(searchResult.Data.Character.Name.Native)
+
+	getResult, err := anilistWrapGO.GetCharacterByID(61371)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	log.Println(getResult.Data.Character.Name.Full)
 }
