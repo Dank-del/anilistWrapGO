@@ -1,46 +1,59 @@
-# anilistWrapGo
+# anilistWrapGO
 
-> Unofficial Anilist.co GraphQL API wrapper for GoLang.
+[![Go Reference](https://pkg.go.dev/badge/github.com/Dank-del/anilistWrapGO.svg)](https://pkg.go.dev/github.com/Dank-del/anilistWrapGO)
 
+An unofficial Go wrapper for the [AniList GraphQL API](https://anilist.gitbook.io/anilist-apiv2-docs).
 
-## Examples
+## Install
 
-### All examples are present as tests in `test` directory.
-Below are a few snippets from there :3
-
-#### User 
-```go
-   usernameResult, err := anilistWrapGO.GetUserByUsername("mimiee") // this person is a thot
-   if err != nil {
-   log.Fatal(err.Error())
-   }
-   log.Println(*usernameResult.Data.User.Name)
+```sh
+go get github.com/Dank-del/anilistWrapGO
 ```
 
-#### Anime 
+## Usage
+
+Each helper returns a typed result struct and an error. Full examples live in the `test` directory.
+
+### Look up a user by name
+
 ```go
-   searchResult, err := anilistWrapGO.SearchAnime("kanojo mo kanojo") // stupid anime
-   if err != nil {
-   log.Fatal(err.Error())
-   }
-   log.Println(searchResult.Data.Media.Title)
+res, err := anilistWrapGO.GetUserByUsername("mimiee")
+if err != nil {
+    log.Fatal(err)
+}
+log.Println(*res.Data.User.Name)
 ```
 
-#### Media
+### Search for an anime
+
 ```go
-   searchData, err := anilistWrapGO.SearchMedia("higehiro") // thot anime
-   if err != nil {
-   log.Fatal(err.Error())
-   }
-   log.Println(searchData.Data.Media.Title.Native)
+res, err := anilistWrapGO.SearchAnime("kanojo mo kanojo")
+if err != nil {
+    log.Fatal(err)
+}
+log.Println(res.Data.Media.Title)
 ```
 
-#### Character
-```go
-   searchResult, err := anilistWrapGO.SearchCharacter("Rin Tohsaka") // goddess
-   if err != nil {
-   log.Fatal(err.Error())
-   }
+### Search for any media
 
-   log.Println(searchResult.Data.Character.Name.Native)
+```go
+res, err := anilistWrapGO.SearchMedia("higehiro")
+if err != nil {
+    log.Fatal(err)
+}
+log.Println(res.Data.Media.Title.Native)
 ```
+
+### Search for a character
+
+```go
+res, err := anilistWrapGO.SearchCharacter("Rin Tohsaka")
+if err != nil {
+    log.Fatal(err)
+}
+log.Println(res.Data.Character.Name.Native)
+```
+
+## Status
+
+This library is a hobby project and is not affiliated with AniList. Pull requests welcome.
